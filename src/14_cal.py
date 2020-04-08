@@ -29,4 +29,47 @@ it should use today’s date to get the month and year.
 
 import sys
 import calendar
-from datetime import datetime
+from datetime import datetime, date
+
+# This is the thing that allows users to put inputs when they run the file 
+# print(type(sys.argv))
+
+# The first arument is the current directory and the second 
+# onwards is where you start getting arguments. They are always strings
+
+# for i in sys.argv:
+#   print(type(i),i)
+
+
+# THIS PROGRAM ASSUMES THAT YOU WILL INPUT NUMBERS 
+# NOT WORDS WHEN SELECTING A CALENDAR
+
+# Access to current day  and date in parsed form:
+today = date.today()
+this_year = today.year
+this_month = today.month
+
+# Access to user specified values cast to int
+try:
+  user_month = int(sys.argv[1])
+  user_year = int(sys.argv[2])
+except:
+  pass
+
+# Initialize calendar object
+cal = calendar.TextCalendar(calendar.SUNDAY)
+
+# Determine which calendar to display
+# No input:
+if len(sys.argv) < 2:
+  output = cal.formatmonth(this_year,this_month)
+# Only 1 input (assume month of current year)
+elif len(sys.argv) <3:
+  output = cal.formatmonth(this_year,user_month)
+# Both inputs:
+elif len(sys.argv) == 3:
+  output = cal.formatmonth(user_year,user_month)
+
+# Display output
+print(output)
+  
